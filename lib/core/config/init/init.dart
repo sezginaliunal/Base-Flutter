@@ -7,7 +7,7 @@ import 'package:test_project/core/utils/logger.dart';
 
 Future<void> init() async {
   await Hive.initFlutter();
-  await Hive.openBox<String>(HiveBoxConstants.theme.value);
+  await Hive.openBox<dynamic>(HiveBoxConstants.theme.value);
 
   Get
     ..lazyPut<ThemeController>(ThemeController.new)
