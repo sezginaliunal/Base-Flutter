@@ -22,7 +22,6 @@ dependencies:
   # Utils
   kartal: any
   # Network
-  dio: any
   connectivity_plus: any
   # Serializer
   json_annotation: any
@@ -36,6 +35,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   very_good_analysis: any
+  test: ^1.25.15
 
 flutter:
   fonts:

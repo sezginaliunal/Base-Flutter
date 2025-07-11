@@ -1,13 +1,22 @@
-class AppUrls {
-  factory AppUrls() {
-    return _instance;
-  }
+enum BaseUrls {
+  jsonPlaceholder('https://jsonplaceholder.typicode.com'),
+  myApi('http://91.99.198.71:8000/api');
 
-  AppUrls._privateConstructor();
+  final String url;
+  const BaseUrls(this.url);
+}
 
-  static final AppUrls _instance = AppUrls._privateConstructor();
+enum AppUrls {
+  todos('/todos', BaseUrls.jsonPlaceholder),
+  posts('/posts', BaseUrls.jsonPlaceholder),
+  users('/users', BaseUrls.jsonPlaceholder),
+  login('/auth/login', BaseUrls.myApi);
 
-  static const String baseUrl = 'https://jsonplaceholder.typicode.com';
+  final String path;
+  final BaseUrls base;
 
-  String getTodos() => '$baseUrl/todos';
+  const AppUrls(this.path, this.base);
+
+  String get url => '${base.url}$path';
+  String get baseUrl => base.url;
 }

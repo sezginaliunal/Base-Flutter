@@ -19,11 +19,12 @@ class DarkColors {
   static const surface = Color(0xFF1E1E1E);
   static const onSurface = Color(0xFFE3E3E3);
 
-  // Error
+  // Error & Success
   static const error = Color(0xFFCF6679);
   static const onError = Color(0xFF140C0D);
   static const errorContainer = Color(0xFF8C1D1D);
   static const onErrorContainer = Color(0xFFFFDAD6);
+  static const greenAccent = Colors.greenAccent;
 
   // Components
   static const appBarColor = Color(0xFF1F2933);
