@@ -1,287 +1,365 @@
-import 'dart:convert';
+import 'dart:async';
 import 'dart:io';
-
-import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'package:test_project/core/config/constants/app/app_urls.dart';
-import 'package:test_project/core/config/constants/routes/navigation_routes.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+// import 'package:get/get.dart' hide FormData, MultipartFile, Response;
+import 'package:path/path.dart' as path;
+// import 'package:test_project/core/config/constants/routes/navigation_routes.dart';
 import 'package:test_project/core/models/api_response.dart';
 import 'package:test_project/core/services/network/network_service.dart';
-import 'package:test_project/core/utils/dialogs.dart';
-import 'package:test_project/core/utils/logger.dart';
 import 'package:test_project/core/utils/response_message.dart';
-import 'package:path/path.dart' as path;
+
+import '../../config/constants/app/app_urls.dart';
 
 class BaseNetwork {
   factory BaseNetwork() => _instance;
-  BaseNetwork._internal();
+
+  BaseNetwork._internal() {
+    _dio = Dio(
+      BaseOptions(
+        baseUrl: BaseUrls.myApi.url,
+        connectTimeout: const Duration(seconds: 40),
+        receiveTimeout: const Duration(seconds: 40),
+        sendTimeout: const Duration(seconds: 40),
+      ),
+    );
+
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          // final token = LoginService().accessToken;
+          // if (token.ext.isNotNullOrNoEmpty) {
+          //   options.headers['Authorization'] = 'Bearer $token';
+          // }
+          // debugPrint(options.uri.toString());
+          // debugPrint(options.headers.toString());
+          // debugPrint(options.data.toString());
+          return handler.next(options);
+        },
+        onResponse: (response, handler) async {
+          return handler.next(response);
+        },
+        onError: (DioException e, handler) async {
+          // final opts = e.requestOptions;
+          // final statusCode = e.response?.statusCode ?? 0;
+
+          // if (statusCode == HttpStatus.unauthorized &&
+          //     !_isAuthRoute(Get.currentRoute)) {
+          //   if (!_isUserLoggedIn || _sessionHandled) {
+          //     return handler.reject(e);
+          //   }
+          //   // Eğer bu istek zaten bir refresh token isteği ise veya retry ise, direkt logout
+          //   final isRetry = opts.extra['isRetry'] == true;
+          //   final isRefreshRequest = opts.extra['isRefreshRequest'] == true;
+
+          //   if (isRetry || isRefreshRequest) {
+          //     await _authHandler(statusCode, 'sessionExpired'.tr);
+          //     return handler.reject(e);
+          //   }
+
+          //   // Refresh işlemi devam ediyorsa bekle
+          //   if (_isRefreshing) {
+          //     try {
+          //       await _refreshCompleter?.future;
+          //       if (!_isUserLoggedIn) {
+          //         return handler.reject(e);
+          //       }
+          //       // Refresh başarılı olduysa orijinal isteği tekrar dene
+          //       final retryOpts = opts.copyWith(extra: {'isRetry': true});
+          //       try {
+          //         final cloneResponse = await _dio.request(
+          //           retryOpts.path,
+          //           data: retryOpts.data,
+          //           queryParameters: retryOpts.queryParameters,
+          //           options: Options(
+          //             method: retryOpts.method,
+          //             headers: retryOpts.headers,
+          //             extra: retryOpts.extra,
+          //           ),
+          //         );
+          //         return handler.resolve(cloneResponse);
+          //       } catch (retryError) {
+          //         return handler.reject(retryError as DioException);
+          //       }
+          //     } catch (_) {
+          //       // Refresh başarısız olduysa reject et
+          //       return handler.reject(e);
+          //     }
+          //   }
+
+          //   // Refresh işlemini başlat
+          //   _isRefreshing = true;
+          //   _refreshCompleter = Completer<void>();
+
+          //   try {
+          //     // Refresh token isteğini manuel olarak yap (döngüyü engellemek için)
+          //     final refreshToken = LoginService().refreshToken;
+          //     final refreshTokenRequest = RefreshTokenRequest(
+          //       refreshToken: refreshToken,
+          //     );
+
+          //     final refreshResponse = await _dio.post<dynamic>(
+          //       AppUrls.refresh.url,
+
+          //       data: refreshTokenRequest.toJson(),
+          //       options: Options(extra: {'isRefreshRequest': true}),
+          //     );
+
+          //     if (refreshResponse.statusCode == 200 &&
+          //         refreshResponse.data is Map<String, dynamic>) {
+          //       final responseData =
+          //           refreshResponse.data as Map<String, dynamic>;
+
+          //       // Buraya LoginService'inizin model dönüşümünü yapın
+          //       final loginData = LoginResponse.fromJson(responseData);
+
+          //       // Şimdilik generic bir şekilde token'ı kaydet
+          //       if (loginData.accessToken.ext.isNotNullOrNoEmpty) {
+          //         // Token'ı güncelle - kendi metodunuzu kullanın
+          //         await LoginService().setLoginResponse(loginData);
+          //         _refreshCompleter?.complete();
+
+          //         // Orijinal isteği retry et
+          //         final retryOpts = opts.copyWith(extra: {'isRetry': true});
+          //         try {
+          //           final cloneResponse = await _dio.request(
+          //             retryOpts.path,
+          //             data: retryOpts.data,
+          //             queryParameters: retryOpts.queryParameters,
+          //             options: Options(
+          //               method: retryOpts.method,
+          //               headers: retryOpts.headers,
+          //               extra: retryOpts.extra,
+          //             ),
+          //           );
+          //           return handler.resolve(cloneResponse);
+          //         } catch (retryError) {
+          //           return handler.reject(retryError as DioException);
+          //         }
+          //       } else {
+          //         throw Exception('Invalid refresh response');
+          //       }
+          //     } else {
+          //       // Refresh başarısız, logout et
+          //       _refreshCompleter?.completeError(Exception('Refresh failed'));
+          //       await _authHandler(statusCode, 'sessionExpired'.tr);
+          //       return handler.reject(e);
+          //     }
+          //   } catch (error) {
+          //     _refreshCompleter?.completeError(error);
+          //     await _authHandler(statusCode, 'sessionExpired'.tr);
+          //     return handler.reject(e);
+          //   } finally {
+          //     _isRefreshing = false;
+          //     _refreshCompleter = null;
+          //   }
+          // }
+
+          // // Diğer hatalar
+          // await _handleOtherErrors(e, statusCode);
+
+          return handler.next(e);
+        },
+      ),
+    );
+  }
 
   static final BaseNetwork _instance = BaseNetwork._internal();
   final networkController = NetworkController();
+  late final Dio _dio;
+  Dio get dio => _dio;
+  bool _sessionHandled = false;
 
-  // GET isteği, path String olarak alınıyor
+  // Token refresh kontrolü için
+  bool _isRefreshing = false;
+  Completer<void>? _refreshCompleter;
+  // bool get _isUserLoggedIn => LoginService().accessToken.ext.isNotNullOrNoEmpty;
+  // ------------------ 🧠 HTTP Request Helper ------------------
+
   Future<ApiResponse<T>> get<T>(
     String path, {
     Map<String, dynamic>? queryParameters,
     T Function(Object? json)? fromJsonT,
-    bool isApiResponse = false,
-    String? baseUrl,
-  }) async {
-    final uri = _buildUri(path, queryParameters, baseUrl);
-    final headers = await _buildHeaders();
-    return _sendRequest<T>(
-      () => http.get(uri, headers: headers),
-      fromJsonT,
-      isApiResponse: isApiResponse,
-    );
-  }
+  }) => _request(
+    'GET',
+    path,
+    queryParameters: queryParameters,
+    fromJsonT: fromJsonT,
+  );
 
-  // POST isteği, path String olarak alınıyor (AppUrls değil)
   Future<ApiResponse<T>> post<T>(
     String path, {
     dynamic data,
-    Map<String, dynamic>? queryParameters,
     T Function(Object? json)? fromJsonT,
-    bool isApiResponse = false,
-    String? baseUrl,
-  }) async {
-    final uri = _buildUri(path, queryParameters, baseUrl);
-    final headers = await _buildHeaders();
-    return _sendRequest<T>(
-      () => http.post(uri, headers: headers, body: jsonEncode(data)),
-      fromJsonT,
-      isApiResponse: isApiResponse,
-    );
-  }
+  }) => _request('POST', path, data: data, fromJsonT: fromJsonT);
 
   Future<ApiResponse<T>> put<T>(
     String path, {
     dynamic data,
     T Function(Object? json)? fromJsonT,
-    bool isApiResponse = false,
-    String? baseUrl,
-  }) async {
-    final uri = _buildUri(path, null, baseUrl);
-    final headers = await _buildHeaders();
-    return _sendRequest<T>(
-      () => http.put(uri, headers: headers, body: jsonEncode(data)),
-      fromJsonT,
-      isApiResponse: isApiResponse,
-    );
-  }
+  }) => _request('PUT', path, data: data, fromJsonT: fromJsonT);
 
   Future<ApiResponse<T>> delete<T>(
     String path, {
     dynamic data,
-    Map<String, dynamic>? queryParameters,
     T Function(Object? json)? fromJsonT,
-    bool isApiResponse = false,
-    String? baseUrl,
-  }) async {
-    final uri = _buildUri(path, queryParameters, baseUrl);
-    final headers = await _buildHeaders();
-    return _sendRequest<T>(
-      () async {
-        final request =
-            http.Request('DELETE', uri)
-              ..headers.addAll(headers)
-              ..body = jsonEncode(data);
-        final streamedResponse = await request.send();
-        return http.Response.fromStream(streamedResponse);
-      },
-      fromJsonT,
-      isApiResponse: isApiResponse,
-    );
-  }
+  }) => _request('DELETE', path, data: data, fromJsonT: fromJsonT);
+
+  // ------------------ 📦 Multipart ------------------
 
   Future<ApiResponse<T>> postMultipart<T>({
     required String urlPath,
     required Map<String, String> fields,
     required Map<String, File> files,
     T Function(Object? json)? fromJsonT,
-    bool isApiResponse = false,
-    String? baseUrl,
   }) async {
-    final hasConnection = true; // await networkController.isConnected();
-    if (!hasConnection) {
-      MyDialog.errorDialog('no_network'.tr);
-      return ApiResponse<T>(
-        success: false,
-        message: 'no_network'.tr,
-        statusCode: 0,
+    // if (!await _checkConnection()) return _noNetwork<T>();
+
+    final formData = FormData();
+    fields.forEach((k, v) => formData.fields.add(MapEntry(k, v)));
+    for (final entry in files.entries) {
+      final file = await MultipartFile.fromFile(
+        entry.value.path,
+        filename: path.basename(entry.value.path),
       );
+      formData.files.add(MapEntry(entry.key, file));
     }
 
     try {
-      final uri = _buildUri(urlPath, null, baseUrl);
-      final request = http.MultipartRequest('POST', uri);
-      request.fields.addAll(fields);
-
-      for (final entry in files.entries) {
-        final file = await http.MultipartFile.fromPath(
-          entry.key,
-          entry.value.path,
-          filename: path.basename(entry.value.path),
-        );
-        request.files.add(file);
-      }
-
-      final streamedResponse = await request.send();
-      final response = await http.Response.fromStream(streamedResponse);
-      return _parseResponse<T>(
-        response,
-        fromJsonT,
-        isApiResponse: isApiResponse,
+      final response = await _dio.post<dynamic>(urlPath, data: formData);
+      return _parseResponse<T>(response, fromJsonT);
+    } catch (_) {
+      return ApiResponse<T>(
+        success: false,
+        message: ResponseMessages.somethingError.message.localizeMessage,
+        statusCode: 0,
       );
-    } catch (e) {
-      return _handleError<T>(e);
     }
   }
 
-  Future<ApiResponse<T>> _sendRequest<T>(
-    Future<http.Response> Function() requestFn,
-    T Function(Object? json)? fromJsonT, {
-    bool isApiResponse = false,
+  // ------------------ 🔧 Utility ------------------
+
+  Future<ApiResponse<T>> _request<T>(
+    String method,
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    T Function(Object? json)? fromJsonT,
   }) async {
-    final hasConnection = true; // await networkController.isConnected();
-    if (!hasConnection) {
-      MyDialog.errorDialog('no_network'.tr);
+    // if (!await _checkConnection()) return _noNetwork<T>();
+    try {
+      final response = await _dio.request<dynamic>(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: Options(method: method),
+      );
+      return _parseResponse<T>(response, fromJsonT);
+    } catch (e) {
+      // Hata interceptor içinde yakalanıyor zaten
       return ApiResponse<T>(
         success: false,
-        message: 'no_network'.tr,
+        message: ResponseMessages.somethingError.message.localizeMessage,
         statusCode: 0,
       );
-    }
-
-    try {
-      final response = await requestFn();
-      return _parseResponse<T>(
-        response,
-        fromJsonT,
-        isApiResponse: isApiResponse,
-      );
-    } catch (e) {
-      return _handleError<T>(e);
     }
   }
 
   ApiResponse<T> _parseResponse<T>(
-    http.Response response,
-    T Function(Object? json)? fromJsonT, {
-    bool isApiResponse = false,
-  }) {
-    try {
-      final statusCode = response.statusCode;
-      final body = jsonDecode(response.body);
-
-      if (kDebugMode) {
-        print('🟢 RESPONSE ALINDI');
-        print('StatusCode: $statusCode');
-        print('Body: $body');
-      }
-
-      if (body is Map<String, dynamic>) {
-        if (statusCode >= 200 && statusCode < 300) {
-          if (isApiResponse) {
-            return ApiResponse<T>.fromJson(body, fromJsonT ?? (_) => null as T);
-          } else {
-            return ApiResponse<T>(
-              success: true,
-              data: fromJsonT?.call(body),
-              message: '',
-              statusCode: statusCode,
-            );
-          }
-        } else {
-          return _handleHttpError<T>(statusCode, body);
-        }
-      } else {
-        return ApiResponse<T>(
-          success: false,
-          message: ResponseMessages.somethingError.message.localizeMessage,
-          statusCode: statusCode,
-        );
-      }
-    } catch (e) {
+    Response<dynamic> response,
+    T Function(Object? json)? fromJsonT,
+  ) {
+    final statusCode = response.statusCode ?? 0;
+    final body = response.data;
+    if (body is Map<String, dynamic>) {
       return ApiResponse<T>(
-        success: false,
-        message:
-            '${ResponseMessages.somethingError.message.localizeMessage} (${e.toString()})',
-        statusCode: response.statusCode,
+        success: statusCode >= 200 && statusCode < 300,
+        data: fromJsonT?.call(body),
+        message: body['message']?.toString() ?? '',
+        statusCode: statusCode,
       );
     }
-  }
-
-  ApiResponse<T> _handleHttpError<T>(
-    int statusCode,
-    Map<String, dynamic> body,
-  ) {
-    final rawMessage = body['message']?.toString().tr;
-
-    if (statusCode == HttpStatus.unauthorized &&
-        Get.currentRoute != RoutesName.login) {
-      // AuthService().sessionExpired();
+    if (body is List) {
+      return ApiResponse<T>(
+        success: statusCode >= 200 && statusCode < 300,
+        data: fromJsonT?.call(body),
+        message: '',
+        statusCode: statusCode,
+      );
     }
-
-    if (statusCode == HttpStatus.notModified) {
-      MyDialog.errorDialog('notUpdated'.tr);
-    }
-
-    if (statusCode == HttpStatus.tooManyRequests) {
-      MyDialog.errorDialog('tooManyRequest'.tr);
-    }
-
     return ApiResponse<T>(
       success: false,
-      message:
-          rawMessage ?? ResponseMessages.somethingError.message.localizeMessage,
+      message: ResponseMessages.somethingError.message.localizeMessage,
       statusCode: statusCode,
     );
   }
 
-  ApiResponse<T> _handleError<T>(Object e) {
-    if (kDebugMode) {
-      Logger.log(LogLevel.error, '🔥 HTTP ERROR: ${e.toString()}');
-    }
+  // Future<void> _handleOtherErrors(DioException e, int statusCode) async {
+  //   final data = e.response?.data;
 
-    return ApiResponse<T>(
-      success: false,
-      message: ResponseMessages.somethingError.message.localizeMessage,
-      statusCode: 0,
-    );
-  }
+  //   // 🔹 "message" veya "durum" anahtarlarından biri varsa onu al
+  //   final message = data is Map<String, dynamic>
+  //       ? (data['message']?.toString().trim().isNotEmpty == true
+  //             ? data['message'].toString()
+  //             : data['durum']?.toString() ??
+  //                   ResponseMessages.somethingError.message.localizeMessage)
+  //       : ResponseMessages.somethingError.message.localizeMessage;
 
-  Future<Map<String, String>> _buildHeaders() async {
-    return {'Content-Type': 'application/json'};
-  }
+  //   if (e.type == DioExceptionType.connectionTimeout ||
+  //       e.type == DioExceptionType.receiveTimeout ||
+  //       e.type == DioExceptionType.sendTimeout) {
+  //     await MyDialog.errorDialog('connectionTimeout'.tr);
+  //   } else if (e.type == DioExceptionType.connectionError) {
+  //     await MyDialog.errorDialog('no_network'.tr);
+  //   } else if (statusCode == HttpStatus.tooManyRequests) {
+  //     await MyDialog.errorDialog('tooManyRequest'.tr);
+  //   } else if (statusCode == HttpStatus.notModified) {
+  //     await MyDialog.errorDialog('notUpdated'.tr);
+  //   } else if (statusCode == HttpStatus.forbidden) {
+  //     await MyDialog.errorDialog(message);
+  //   } else if (message.isNotEmpty) {
+  //     await MyDialog.errorDialog(message);
+  //   } else {
+  //     await MyDialog.errorDialog(
+  //       ResponseMessages.somethingError.message.localizeMessage,
+  //     );
+  //   }
+  // }
 
-  Uri _buildUri(
-    String path, [
-    Map<String, dynamic>? queryParameters,
-    String? baseUrl,
-  ]) {
-    if (path.startsWith('http://') || path.startsWith('https://')) {
-      final uri = Uri.parse(path).replace(
-        queryParameters: queryParameters?.map(
-          (key, value) => MapEntry(key, value.toString()),
-        ),
-      );
-      if (kDebugMode) print('🟢 TAM URL ALGILANDI: $uri');
-      return uri;
-    }
+  // bool _isAuthRoute(String route) =>
+  //     route == RoutesName.login ||
+  //     route == RoutesName.register ||
+  //     route == RoutesName.forgotPassword;
 
-    final base = Uri.parse(baseUrl ?? BaseUrls.myApi.url);
-    final fullPath = path.startsWith('/') ? path.substring(1) : path;
+  // Future<void> _authHandler(int statusCode, String message) async {
+  //   // ✅ ÇÖZÜM 3: Eğer zaten logout olduysa tekrar yapma
+  //   if (_sessionHandled || !_isUserLoggedIn) return;
 
-    final uri = base.replace(
-      path: '${base.path}/$fullPath',
-      queryParameters: queryParameters?.map(
-        (key, value) => MapEntry(key, value.toString()),
-      ),
-    );
+  //   _sessionHandled = true;
 
-    if (kDebugMode) print('🟢 URI OLUŞTURULDU: $uri');
-    return uri;
+  //   try {
+  //     if (_isAuthRoute(Get.currentRoute)) {
+  //       await MyDialog.errorDialog(
+  //         message.isNotEmpty ? message : 'somethingError'.tr,
+  //       );
+  //     } else {
+  //       await MyDialog.errorDialog(message.tr);
+  //       await LoginService().logout();
+  //       // ✅ ÇÖZÜM 4: Logout sonrası flag'leri resetle
+  //       resetSessionFlags();
+  //     }
+  //   } finally {
+  //     // 1 saniye bekle ki diğer istekler de _sessionHandled=true görüp işlem yapmasın
+  //     await Future.delayed(const Duration(seconds: 1));
+  //     _sessionHandled = false;
+  //   }
+  // }
+
+  void resetSessionFlags() {
+    _sessionHandled = false;
+    _isRefreshing = false;
+    _refreshCompleter = null;
   }
 }
+
+// sezginaliunal98@gmail.comimport 'dart:io';

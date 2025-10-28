@@ -2,6 +2,7 @@ class RoutesName {
   static const testView = '/test';
   static const initialRoute = '/';
   static const noNetwork = '/no_network';
+  static const deneme = '/deneme';
   static const unknown = '/unknown';
 
   /// Auth
