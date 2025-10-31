@@ -1,5 +1,3 @@
-import 'package:get/get.dart';
-
 enum ResponseMessages {
   invalidEmail,
   invalidPassword,
@@ -100,14 +98,14 @@ extension ResponseMessagesExtension on ResponseMessages {
   }
 }
 
-extension ApiMessageLocalization on String {
-  String get localizeMessage {
-    // Gelen mesajı tüm enumların .message değerleri ile karşılaştır
-    final match = ResponseMessages.values.firstWhereOrNull(
-      (e) => e.message.toLowerCase() == this.toLowerCase(),
-    );
+// extension ApiMessageLocalization on String {
+//   String get localizeMessage {
+//     // Gelen mesajı tüm enumların .message değerleri ile karşılaştır
+//     final match = ResponseMessages.values.firstWhereOrNull(
+//       (e) => e.message.toLowerCase() == this.toLowerCase(),
+//     );
 
-    // Eşleşirse enum.name üzerinden .tr yap
-    return match?.name.tr ?? this;
-  }
-}
+//     // Eşleşirse enum.name üzerinden .tr yap
+//     return match?.name.tr ?? this;
+//   }
+// }

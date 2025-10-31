@@ -1,192 +1,146 @@
 import 'package:flutter/material.dart';
-import 'package:test_project/core/extensions/context_extension.dart';
-import 'package:test_project/core/extensions/widget_extension.dart';
-import 'package:test_project/main.dart';
+import 'package:test_project/core/config/constants/routes/navigation_routes.dart';
 
-class WidgetDemoApp extends StatelessWidget {
-  const WidgetDemoApp({super.key});
+import 'package:test_project/core/utils/app_navigation.dart';
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Widget Extensions Demo',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const WidgetDemoPage(),
-      scaffoldMessengerKey: scaffoldMessengerKey,
-      navigatorKey: navigatorKey,
-    );
-  }
-}
-
-class WidgetDemoPage extends StatelessWidget {
-  const WidgetDemoPage({super.key});
+class ExamplePage extends StatelessWidget {
+  const ExamplePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final demoItems = [
-      DemoItem(title: 'Klavye açıkmı', widget: TextField()),
-      DemoItem(
-        title: 'Slide Animation',
-        widget: const Icon(Icons.arrow_upward)
-            .sized(
-              context.isSmallPhone
-                  ? 50
-                  : context.isPhone
-                  ? 100
-                  : 200,
-              context.isSmallPhone
-                  ? 50
-                  : context.isPhone
-                  ? 100
-                  : 200,
-            )
-            .animatedSize(),
-      ),
-
-      DemoItem(
-        title: 'Scale Animation',
-        widget: const Icon(Icons.zoom_in).scale(),
-      ),
-      DemoItem(
-        title: 'Padding All',
-        widget: const Text(
-          'Padding All',
-        ).paddingHigh().backgroundColor(Colors.blue.shade100),
-      ),
-      DemoItem(
-        title: 'Corner Radius',
-        widget: const Text(
-          'Corner Radius',
-        ).paddingHigh().backgroundColor(Colors.red.shade100).cornerRadius(1),
-      ),
-      DemoItem(
-        title: 'Shadow',
-        widget: const CircularProgressIndicator().overlayWidget(
-          Text('data').paddingLow().shadow(),
-        ),
-      ),
-      DemoItem(
-        title: 'Visible True',
-        widget: const Text('Visible').visible(isVisible: true),
-      ),
-      DemoItem(
-        title: 'Disabled',
-        widget: ElevatedButton(
-          onPressed: () {},
-          child: const Text('Button'),
-        ).disabled(),
-      ),
-      DemoItem(
-        title: 'Align Center',
-        widget: const Text('Center').align(Alignment.center),
-      ),
-      DemoItem(
-        title: 'Wrap in Card',
-        widget: const Text('Card').paddingLow().wrapInCard(),
-      ),
-      DemoItem(
-        title: 'Tooltip',
-        widget: const Icon(Icons.info).tooltip('Info Icon'),
-      ),
-      DemoItem(
-        title: 'Fade Animation',
-        widget: const Text(
-          'Fade',
-        ).fade(opacity: 0.5, duration: const Duration(seconds: 1)),
-      ),
-
-      DemoItem(
-        title: 'Rotate Animation',
-        widget: const Icon(Icons.refresh).rotate(turns: 0.25),
-      ),
-
-      DemoItem(
-        title: 'Tap Animate Scale',
-        widget: const Icon(Icons.touch_app).tapAnimateScale(),
-      ),
-      DemoItem(
-        title: 'Press Animate Rotation',
-        widget: const Icon(Icons.rotate_right).pressAnimateRotation(),
-      ),
-      DemoItem(
-        title: 'Hover Animate Opacity',
-        widget: const Icon(Icons.opacity).hoverAnimateOpacity(),
-      ),
-      DemoItem(
-        title: 'Overlay Widget',
-        widget: const Text('Overlay').overlayWidget(
-          Container(width: 50, height: 50, color: Colors.red.withOpacity(0.5)),
-        ),
-      ),
-      DemoItem(
-        title: 'With Badge',
-        widget: Icon(
-          Icons.email,
-          size: 40,
-        ).withBadge(width: 20, height: 20), // icon boyutunun %20'si
-      ),
-      DemoItem(
-        title: 'Debug Border',
-        widget: const Text('Debug').debugBorder(),
-      ),
-      DemoItem(
-        title: 'Clip Circle',
-        widget: Container(
-          color: Colors.purple,
-          width: 60,
-          height: 60,
-        ).clipCircle(),
-      ),
-      DemoItem(
-        title: 'Circle Avatar',
-        widget: Icon(Icons.person, color: Colors.white).circleAvatar(
-          radius: 40,
-          backgroundImage: NetworkImage(
-            'https://cdn.pixabay.com/photo/2025/10/02/10/07/duck-9868154_1280.jpg',
-          ),
-        ),
-      ),
-
-      DemoItem(
-        title: 'Clip Oval',
-        widget: Container(color: Colors.teal, width: 80, height: 60).clipOval(),
-      ),
-      DemoItem(
-        title: 'With Border',
-        widget: Container(
-          width: 80,
-          height: 50,
-          color: Colors.yellow,
-        ).withBorder(color: Colors.black, width: 2),
-      ),
-    ];
-
     return Scaffold(
-      appBar: AppBar(title: const Text('Widget Extensions Demo')),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: demoItems.length,
-        itemBuilder: (context, index) {
-          final item = demoItems[index];
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                item.title,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              item.widget,
-            ],
-          );
-        },
+      appBar: AppBar(title: const Text("AppNav Örnek Sayfası")),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: ListView(
+          children: [
+            // ========== PUSH ==========
+            ElevatedButton(
+              onPressed: () => AppNav.push(const DetailPage()),
+              child: const Text("Push → Widget (DetailPage)"),
+            ),
+            ElevatedButton(
+              onPressed: () => AppNav.pushNamed(RoutesName.settings),
+              child: const Text("PushNamed → Settings"),
+            ),
+
+            // ========== REPLACE ==========
+            ElevatedButton(
+              onPressed: () => AppNav.replace(const ReplacePage()),
+              child: const Text("Replace → Widget (ReplacePage)"),
+            ),
+
+            // ========== OFF ALL ==========
+            ElevatedButton(
+              onPressed: () => AppNav.offAll(const ResetRootPage()),
+              child: const Text("OffAll → Widget (Root Reset)"),
+            ),
+            ElevatedButton(
+              onPressed: () => AppNav.offAllNamed(RoutesName.home),
+              child: const Text("OffAllNamed → Home"),
+            ),
+
+            // ========== POP ==========
+            ElevatedButton(
+              onPressed: () => AppNav.pop(),
+              child: const Text("Pop"),
+            ),
+
+            // ========== BACK TO ==========
+            ElevatedButton(
+              onPressed: () => AppNav.backTo(RoutesName.home),
+              child: const Text("Back To Home"),
+            ),
+
+            // ========== MAYBE POP ==========
+            ElevatedButton(
+              onPressed: () async {
+                bool popped = await AppNav.maybePop();
+                debugPrint("MaybePop sonucu: $popped");
+              },
+              child: const Text("Maybe Pop"),
+            ),
+
+            // ========== BACK OR ==========
+            ElevatedButton(
+              onPressed: () => AppNav.backOr(RoutesName.home),
+              child: const Text("Back Or Home"),
+            ),
+
+            // ========== TO HOME ==========
+            ElevatedButton(
+              onPressed: () => AppNav.toHome(),
+              child: const Text("To Home (Clear Stack)"),
+            ),
+
+            const SizedBox(height: 24),
+            const Divider(),
+            const SizedBox(height: 16),
+
+            // ========== ROUTE CHECK ==========
+            Builder(
+              builder: (ctx) {
+                final isHome = AppNav.isCurrent(RoutesName.home);
+                return Text("Şu an Home mu? → $isHome");
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
-class DemoItem {
-  final String title;
-  final Widget widget;
+// =============================================
+// DUMMY SAYFALAR (örnek olarak basit sayfalar)
+// =============================================
+class DetailPage extends StatelessWidget {
+  const DetailPage({super.key});
 
-  DemoItem({required this.title, required this.widget});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Detail Page")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () => AppNav.pop(),
+          child: const Text("Geri dön"),
+        ),
+      ),
+    );
+  }
+}
+
+class ReplacePage extends StatelessWidget {
+  const ReplacePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Replace Page")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () => AppNav.toHome(),
+          child: const Text("Anasayfaya dön"),
+        ),
+      ),
+    );
+  }
+}
+
+class ResetRootPage extends StatelessWidget {
+  const ResetRootPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Reset Root Page")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () => AppNav.offAllNamed(RoutesName.home),
+          child: const Text("Tamamen sıfırla → Home"),
+        ),
+      ),
+    );
+  }
 }

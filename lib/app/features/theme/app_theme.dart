@@ -65,7 +65,6 @@ class AppThemes {
         disabledBackgroundColor: LightColors.buttonDisabled,
         disabledForegroundColor: LightColors.onButtonDisabled,
         elevation: 2,
-        shadowColor: LightColors.shadow.withOpacity(0.2),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -123,10 +122,7 @@ class AppThemes {
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(
-          color: LightColors.cardBorder.withOpacity(0.2),
-          width: 1,
-        ),
+        side: BorderSide(width: 1),
       ),
     ),
 
@@ -399,7 +395,6 @@ class AppThemes {
         disabledBackgroundColor: DarkColors.buttonDisabled,
         disabledForegroundColor: DarkColors.onButtonDisabled,
         elevation: 2,
-        shadowColor: DarkColors.shadow.withOpacity(0.3),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -457,10 +452,7 @@ class AppThemes {
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(
-          color: DarkColors.cardBorder.withOpacity(0.2),
-          width: 1,
-        ),
+        side: BorderSide(width: 1),
       ),
     ),
 

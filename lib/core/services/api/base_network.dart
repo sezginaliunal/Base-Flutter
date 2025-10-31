@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 // import 'package:get/get.dart' hide FormData, MultipartFile, Response;
 import 'package:path/path.dart' as path;
 // import 'package:test_project/core/config/constants/routes/navigation_routes.dart';
@@ -168,11 +167,11 @@ class BaseNetwork {
   final networkController = NetworkController();
   late final Dio _dio;
   Dio get dio => _dio;
-  bool _sessionHandled = false;
+  // bool _sessionHandled = false;
 
   // Token refresh kontrolü için
-  bool _isRefreshing = false;
-  Completer<void>? _refreshCompleter;
+  // bool _isRefreshing = false;
+  // Completer<void>? _refreshCompleter;
   // bool get _isUserLoggedIn => LoginService().accessToken.ext.isNotNullOrNoEmpty;
   // ------------------ 🧠 HTTP Request Helper ------------------
 
@@ -231,7 +230,7 @@ class BaseNetwork {
     } catch (_) {
       return ApiResponse<T>(
         success: false,
-        message: ResponseMessages.somethingError.message.localizeMessage,
+        message: ResponseMessages.somethingError.message,
         statusCode: 0,
       );
     }
@@ -259,7 +258,7 @@ class BaseNetwork {
       // Hata interceptor içinde yakalanıyor zaten
       return ApiResponse<T>(
         success: false,
-        message: ResponseMessages.somethingError.message.localizeMessage,
+        message: ResponseMessages.somethingError.message,
         statusCode: 0,
       );
     }
@@ -289,7 +288,7 @@ class BaseNetwork {
     }
     return ApiResponse<T>(
       success: false,
-      message: ResponseMessages.somethingError.message.localizeMessage,
+      message: ResponseMessages.somethingError.message,
       statusCode: statusCode,
     );
   }
@@ -302,8 +301,8 @@ class BaseNetwork {
   //       ? (data['message']?.toString().trim().isNotEmpty == true
   //             ? data['message'].toString()
   //             : data['durum']?.toString() ??
-  //                   ResponseMessages.somethingError.message.localizeMessage)
-  //       : ResponseMessages.somethingError.message.localizeMessage;
+  //                   ResponseMessages.somethingError.message)
+  //       : ResponseMessages.somethingError.message;
 
   //   if (e.type == DioExceptionType.connectionTimeout ||
   //       e.type == DioExceptionType.receiveTimeout ||
@@ -321,7 +320,7 @@ class BaseNetwork {
   //     await MyDialog.errorDialog(message);
   //   } else {
   //     await MyDialog.errorDialog(
-  //       ResponseMessages.somethingError.message.localizeMessage,
+  //       ResponseMessages.somethingError.message,
   //     );
   //   }
   // }
@@ -356,9 +355,9 @@ class BaseNetwork {
   // }
 
   void resetSessionFlags() {
-    _sessionHandled = false;
-    _isRefreshing = false;
-    _refreshCompleter = null;
+    // _sessionHandled = false;
+    // _isRefreshing = false;
+    // _refreshCompleter = null;
   }
 }
 

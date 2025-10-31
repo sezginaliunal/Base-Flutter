@@ -1,16 +1,6 @@
 class RoutesName {
-  static const testView = '/test';
-  static const initialRoute = '/';
-  static const noNetwork = '/no_network';
-  static const deneme = '/deneme';
-  static const unknown = '/unknown';
-
-  /// Auth
-  static const register = '/register';
-
-  /// Login
-  static const login = '/login';
-
-  // Features
+  static const init = '/';
   static const home = '/home';
+  static const settings = '/settings';
+  static const profile = '/profile';
 }

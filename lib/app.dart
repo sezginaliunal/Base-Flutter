@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:test_project/core/components/unknown_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_project/app/features/theme/bloc/theme_cubit.dart';
+import 'package:test_project/app/features/theme/bloc/theme_state.dart';
 import 'package:test_project/core/config/constants/app/app_infos.dart';
+import 'package:test_project/core/config/constants/app/app_keys.dart';
 import 'package:test_project/core/config/constants/routes/navigation_route_pages.dart';
 import 'package:test_project/core/config/constants/routes/navigation_routes.dart';
-import 'package:test_project/core/config/theme/theme_controller.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AppTheme initialTheme;
+  const MyApp({super.key, required this.initialTheme});
 
   @override
   Widget build(BuildContext context) {
-    final themeController = Get.find<ThemeController>();
-
-    return Obx(
-      () => GetMaterialApp(
-        title: AppInfos.appName,
-        debugShowCheckedModeBanner: false,
-        theme: themeController.getThemeData(),
-        initialRoute: RoutesName.initialRoute,
-        getPages: AppRouter().getPages(),
-        unknownRoute: GetPage(
-          name: RoutesName.unknown,
-          page: () => const UnknownView(),
-        ),
+    return BlocProvider(
+      create: (_) => ThemeCubit()..setTheme(initialTheme),
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: AppInfos.appName,
+            debugShowCheckedModeBanner: false,
+            theme: state.themeData,
+            navigatorKey: AppKeys.navigatorKey,
+            initialRoute: RoutesName.init,
+            onGenerateRoute: AppRouter.instance.onGenerateRoute,
+            onUnknownRoute: AppRouter.instance.onUnknownRoute,
+          );
+        },
       ),
     );
   }
