@@ -27,7 +27,13 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
+
 	<string>Main</string>
+	<key>CFBundleLocalizations</key>
+<array>
+	<string>en</string>
+	<string>nb</string>
+</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

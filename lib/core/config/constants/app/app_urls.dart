@@ -1,16 +1,16 @@
 enum BaseUrls {
-  jsonPlaceholder('https://jsonplaceholder.typicode.com'),
-  myApi('http://91.99.198.71:8000/api');
+  jsonPlaceholder('https://jsonplaceholder.typicode.com/'),
+  myApi('http://91.99.198.71:8000/api/');
 
   final String url;
   const BaseUrls(this.url);
 }
 
 enum AppUrls {
-  todos('/todos', BaseUrls.jsonPlaceholder),
-  posts('/posts', BaseUrls.jsonPlaceholder),
-  users('/users', BaseUrls.jsonPlaceholder),
-  login('/auth/login', BaseUrls.myApi);
+  todos('todos', BaseUrls.jsonPlaceholder),
+  posts('posts', BaseUrls.jsonPlaceholder),
+  users('users', BaseUrls.jsonPlaceholder),
+  login('auth/login', BaseUrls.myApi);
 
   final String path;
   final BaseUrls base;

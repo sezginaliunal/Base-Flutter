@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_project/core/config/constants/app/app_keys.dart';
+import 'package:test_project/core/extensions/context_extension.dart';
 
 /// App genelinde context kullanmadan UI bileşenleri göstermek için yardımcı sınıf.
 /// Snackbar, Dialog, BottomSheet, DatePicker, TimePicker hepsi tek yerden yönetilir.
@@ -22,8 +23,13 @@ class AppUI {
         content: Text(message),
         behavior: SnackBarBehavior.floating,
         duration: duration,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        margin: const EdgeInsets.all(16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(ctx.lowRadiusValue),
+        ),
+        animation: CurvedAnimation(
+          parent: kAlwaysCompleteAnimation, // or custom AnimationController
+          curve: Curves.slowMiddle, // daha yumuşak geçiş
+        ),
       ),
     );
   }
@@ -41,7 +47,9 @@ class AppUI {
     await showDialog(
       context: ctx,
       builder: (_) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(ctx.lowRadiusValue),
+        ),
         title: Text(title),
         content: Text(message),
         actions: [
@@ -65,8 +73,10 @@ class AppUI {
     return showModalBottomSheet<T>(
       context: ctx,
       backgroundColor: Theme.of(ctx).scaffoldBackgroundColor,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(ctx.lowRadiusValue),
+        ),
       ),
       builder: (_) => child,
     );

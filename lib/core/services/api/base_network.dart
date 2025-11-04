@@ -16,10 +16,14 @@ class BaseNetwork {
   BaseNetwork._internal() {
     _dio = Dio(
       BaseOptions(
-        baseUrl: BaseUrls.myApi.url,
+        baseUrl: BaseUrls.jsonPlaceholder.url,
         connectTimeout: const Duration(seconds: 40),
         receiveTimeout: const Duration(seconds: 40),
         sendTimeout: const Duration(seconds: 40),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
       ),
     );
 
@@ -30,15 +34,18 @@ class BaseNetwork {
           // if (token.ext.isNotNullOrNoEmpty) {
           //   options.headers['Authorization'] = 'Bearer $token';
           // }
-          // debugPrint(options.uri.toString());
-          // debugPrint(options.headers.toString());
-          // debugPrint(options.data.toString());
+          // final fullUrl =
+          //     '${options.baseUrl}${options.path}?${options.queryParameters.isNotEmpty ? options.queryParameters : ''}';
+          // debugPrint('🛰️ [REQUEST] ${options.method} => $fullUrl');
+          // debugPrint('📦 Headers: ${options.headers}');
+          // debugPrint('📦 Data: ${options.data}');
           return handler.next(options);
         },
         onResponse: (response, handler) async {
           return handler.next(response);
         },
         onError: (DioException e, handler) async {
+          print(e);
           // final opts = e.requestOptions;
           // final statusCode = e.response?.statusCode ?? 0;
 
