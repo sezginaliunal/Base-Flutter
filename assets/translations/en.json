@@ -99,14 +99,15 @@
   },
 
   "validation": {
-    "invalid_email": "Invalid email address",
-    "password_mismatch": "Passwords do not match",
-    "password_short": "Password too short",
-    "field_required": "Field is required",
-    "min_length": "Minimum {count} characters required",
-    "max_length": "Maximum {count} characters allowed",
-    "invalid_format": "Invalid format",
-    "something_went_wrong": "Something went wrong"
+  "invalid_email": "Enter a valid email",
+  "email_required": "Email is required",
+  "password_required": "Password is required",
+  "password_min_length": "Password must be at least {count} characters",
+  "field_required": "Field is required",
+  "invalid_number": "Enter a valid number",
+  "phone_required": "Phone number is required",
+  "invalid_phone": "Enter a valid phone number",
+  "invalid_url": "Enter a valid URL (must start with http or https)"
   },
 
   "items": {
