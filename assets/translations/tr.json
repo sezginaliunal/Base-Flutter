@@ -99,14 +99,15 @@
   },
 
   "validation": {
-    "invalid_email": "Geçersiz e-posta adresi",
-    "password_mismatch": "Şifreler eşleşmiyor",
-    "password_short": "Şifre çok kısa",
-    "field_required": "Bu alan zorunludur",
-    "min_length": "En az {count} karakter olmalı",
-    "max_length": "En fazla {count} karakter olabilir",
-    "invalid_format": "Geçersiz format",
-    "something_went_wrong": "Bir şeyler ters gitti"
+  "invalid_email": "Geçerli bir e-posta adresi girin",
+  "email_required": "E-posta alanı zorunludur",
+  "password_required": "Şifre alanı zorunludur",
+  "password_min_length": "Şifre en az {count} karakter olmalıdır",
+  "field_required": "Bu alan zorunludur",
+  "invalid_number": "Geçerli bir sayı girin",
+  "phone_required": "Telefon numarası zorunludur",
+  "invalid_phone": "Geçerli bir telefon numarası girin",
+  "invalid_url": "Geçerli bir URL girin (http veya https ile başlamalı)"
   },
 
   "items": {
