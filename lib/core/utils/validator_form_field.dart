@@ -1,13 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:test_project/core/config/constants/app/app_locale_keys.dart';
 import 'package:test_project/core/extensions/string_extension.dart';
 
 class Validators {
   // =================== Email ===================
   static String? validateEmail(String? input) {
     if (input.isNullOrEmpty) {
-      return 'Email is required';
+      return AppLocaleKeys.valEmailRequired.tr();
     }
     if (!(input?.isEmail ?? false)) {
-      return 'Enter a valid email';
+      return AppLocaleKeys.valInvalidEmail.tr();
     }
     return null;
   }
@@ -15,10 +17,11 @@ class Validators {
   // =================== Password ===================
   static String? validatePassword(String? input, {int minLength = 8}) {
     if (input.isNullOrEmpty) {
-      return 'Password is required';
+      return AppLocaleKeys.valPasswordRequired.tr();
     }
     if ((input?.trim().length ?? 0) < minLength) {
-      return 'Password must be at least $minLength characters';
+      return AppLocaleKeys.valPasswordMinLength
+          .tr(namedArgs: {'count': minLength.toString()});
     }
     return null;
   }
@@ -26,30 +29,42 @@ class Validators {
   // =================== Null / Required ===================
   static String? validateNull(String? input) {
     if (input.isNullOrEmpty) {
-      return 'Field is required';
+      return AppLocaleKeys.valFieldRequired.tr();
     }
     return null;
   }
 
-  // =================== Optional: Numeric ===================
+  // =================== Numeric ===================
   static String? validateNumeric(String? input) {
     if (input.isNullOrEmpty) {
-      return 'Field is required';
+      return AppLocaleKeys.valFieldRequired.tr();
     }
     if (!(input?.isNumeric ?? false)) {
-      return 'Enter a valid number';
+      return AppLocaleKeys.valInvalidNumber.tr();
     }
     return null;
   }
 
-  // =================== Optional: Phone Number ===================
+  // =================== Phone Number ===================
   static String? validatePhoneNumber(String? input) {
     if (input.isNullOrEmpty) {
-      return 'Phone number is required';
+      return AppLocaleKeys.valPhoneRequired.tr();
     }
     if (!(input?.isPhoneNumber ?? false)) {
-      return 'Enter a valid phone number';
+      return AppLocaleKeys.valInvalidPhone.tr();
     }
+    return null;
+  }
+
+  // =================== Http / URL ===================
+  static String? validateHttp(String? input) {
+    final nullError = validateNull(input);
+    if (nullError != null) return nullError;
+
+    if (!(input!.startsWith('http://') || input.startsWith('https://'))) {
+      return AppLocaleKeys.valInvalidUrl.tr();
+    }
+
     return null;
   }
 }
