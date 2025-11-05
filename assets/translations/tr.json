@@ -1,4 +1,9 @@
 {
+   "init":{
     "error":"Hata"
-    
+  },
+  "app_title": "Test Projesi",
+  "hello": "Merhaba",
+  "welcome": "Hoş geldin, {name}!",
+  "items": "{count} adet"
 }

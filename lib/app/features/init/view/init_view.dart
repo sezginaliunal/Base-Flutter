@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_project/app/features/theme/cubit/theme_cubit.dart';
-import 'package:test_project/core/config/constants/routes/navigation_routes.dart';
+import 'package:test_project/core/config/constants/app/app_infos.dart';
+import 'package:test_project/core/config/constants/app/app_locale_keys.dart';
+import 'package:test_project/core/extensions/string_extension.dart';
 import 'package:test_project/core/extensions/widget_extension.dart';
-import 'package:test_project/core/utils/app_navigation.dart';
 
 class InitPage extends StatelessWidget {
   const InitPage({super.key});
@@ -17,9 +19,10 @@ class InitPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(AppLocaleKeys.error.locale),
             Text(
               isDark ? 'Switch to Light' : 'Switch to Dark',
-            ).onTap(() => AppNav.pushNamed(RoutesName.dummy)),
+            ).onTap(() => context.setLocale(AppInfos.locale.first)),
           ],
         ),
       ),

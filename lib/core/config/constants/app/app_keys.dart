@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
-/// Tüm context gerektiren işlemler için global key
+/// Uygulama genelinde context erişimi ve navigator işlemleri için singleton yapı
 class AppKeys {
-  static final GlobalKey<NavigatorState> navigatorKey =
-      GlobalKey<NavigatorState>();
+  static final AppKeys _instance = AppKeys._internal();
 
-  static BuildContext? get context => navigatorKey.currentContext;
+  factory AppKeys() => _instance;
+
+  AppKeys._internal();
+
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+  BuildContext? get context => navigatorKey.currentContext;
 }

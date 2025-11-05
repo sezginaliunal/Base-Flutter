@@ -1,4 +1,4 @@
-import 'package:test_project/app/features/jsonplaceholder/dummy_model.dart';
+import 'package:test_project/app/features/jsonplaceholder/data/models/dummy_model.dart';
 import 'package:test_project/core/config/constants/app/app_urls.dart';
 import 'package:test_project/core/models/api_response.dart';
 import 'package:test_project/core/services/api/base_network.dart';

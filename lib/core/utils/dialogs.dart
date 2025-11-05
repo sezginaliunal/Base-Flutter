@@ -7,7 +7,7 @@ import 'package:test_project/core/extensions/context_extension.dart';
 class AppUI {
   AppUI._();
 
-  static BuildContext? get _context => AppKeys.context;
+  static BuildContext? get _context => AppKeys().context;
 
   // ===================== SNACKBAR =====================
   static void showSnack(

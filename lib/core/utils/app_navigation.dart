@@ -4,10 +4,10 @@ import 'package:test_project/core/config/constants/routes/navigation_routes.dart
 
 class AppNav {
   /// Kısayol: global navigatorState
-  static NavigatorState? get _nav => AppKeys.navigatorKey.currentState;
+  static NavigatorState? get _nav => AppKeys().navigatorKey.currentState;
 
   /// Kısayol: global context
-  static BuildContext? get context => AppKeys.context;
+  static BuildContext? get context => AppKeys().context;
 
   // =================== PUSH ===================
   static Future<T?>? push<T>(Widget page) {

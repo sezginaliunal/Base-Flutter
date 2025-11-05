@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_project/app/features/jsonplaceholder/dummy_cubit.dart';
-import 'package:test_project/app/features/jsonplaceholder/dummy_repository.dart';
-import 'package:test_project/app/features/jsonplaceholder/dummy_state.dart';
+import 'package:test_project/app/features/jsonplaceholder/cubit/dummy_cubit.dart';
+import 'package:test_project/app/features/jsonplaceholder/cubit/dummy_state.dart';
+import 'package:test_project/core/config/init/service_locator.dart';
 import 'package:test_project/core/utils/dialogs.dart';
 
 class DummyPage extends StatelessWidget {
@@ -11,7 +11,7 @@ class DummyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => DummyCubit(DummyRepository()),
+      create: (_) => sl<DummyCubit>(), // ✅ GetIt üzerinden geliyor
       child: const _DummyView(),
     );
   }

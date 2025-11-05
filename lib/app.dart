@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_project/app/features/theme/cubit/theme_cubit.dart';
@@ -17,10 +18,13 @@ class MyApp extends StatelessWidget {
       title: AppInfos.appName,
       debugShowCheckedModeBanner: false,
       theme: themeCubit.state.themeData,
-      navigatorKey: AppKeys.navigatorKey,
+      navigatorKey: AppKeys().navigatorKey,
       initialRoute: RoutesName.init,
       onGenerateRoute: AppRouter.instance.onGenerateRoute,
       onUnknownRoute: AppRouter.instance.onUnknownRoute,
+      locale: context.locale,
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
     );
   }
 }

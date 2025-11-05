@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Tarih formatlama için
+import 'package:easy_localization/easy_localization.dart';
 
 extension StringExtensions on String? {
+  //Locale
+  String get locale => this?.tr() ?? this ?? '';
+
   // =================== Null / Boş Kontroller ===================
   bool get isNullOrEmpty => this == null || this!.trim().isEmpty;
   bool get isNotNullOrEmpty => !isNullOrEmpty;

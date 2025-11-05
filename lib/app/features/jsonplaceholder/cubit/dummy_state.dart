@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:test_project/app/features/jsonplaceholder/dummy_model.dart';
+import 'package:test_project/app/features/jsonplaceholder/data/models/dummy_model.dart';
 
 abstract class DummyState {}
 
