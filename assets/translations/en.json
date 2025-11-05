@@ -1,10 +1,203 @@
 {
-  "init":{
-    "error":"Error"
+  "init": {
+    "error": "Error",
+    "loading": "Loading...",
+    "success": "Success",
+    "network_error": "Network connection failed",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "yes": "Yes",
+    "no": "No"
   },
-  "app_title": "My Test Project",
-  "hello": "Hello",
-  "welcome": "Welcome, {name}!",
-  "items": "{count} item(s)"
 
+  "app": {
+    "title": "My Test Project",
+    "version": "Version",
+    "logout": "Log out",
+    "language": "Language",
+    "theme": "Theme",
+    "dark_mode": "Dark Mode",
+    "light_mode": "Light Mode",
+    "settings": "Settings",
+    "about": "About",
+    "privacy_policy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "signup": "Sign up",
+    "signin": "Sign in",
+    "forgot_password": "Forgot password?",
+    "reset_password": "Reset Password",
+    "new_password": "New Password",
+    "confirm_password": "Confirm Password",
+    "old_password": "Old Password",
+    "change_password": "Change Password",
+    "email": "Email",
+    "username": "Username",
+    "password": "Password",
+    "remember_me": "Remember me",
+    "dont_have_account": "Don't have an account?",
+    "already_have_account": "Already have an account?",
+    "verification_code": "Verification Code",
+    "send_code": "Send Code",
+    "verify": "Verify",
+    "login_success": "Login successful",
+    "register_success": "Registration successful"
+  },
+
+  "home": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "welcome": "Welcome, {name}!",
+    "search": "Search",
+    "search_placeholder": "Search something...",
+    "notifications": "Notifications",
+    "view_all": "View All",
+    "recent_activity": "Recent Activity",
+    "see_more": "See more"
+  },
+
+  "profile": {
+    "profile": "Profile",
+    "edit_profile": "Edit Profile",
+    "update_profile": "Update Profile",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "full_name": "Full Name",
+    "phone": "Phone",
+    "address": "Address",
+    "city": "City",
+    "country": "Country",
+    "save_changes": "Save Changes",
+    "upload_photo": "Upload Photo",
+    "remove_photo": "Remove Photo"
+  },
+
+  "forms": {
+    "submit": "Submit",
+    "save": "Save",
+    "update": "Update",
+    "delete": "Delete",
+    "add": "Add",
+    "edit": "Edit",
+    "clear": "Clear",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "confirm": "Confirm",
+    "close": "Close",
+    "open": "Open",
+    "select": "Select",
+    "choose_file": "Choose File",
+    "no_data": "No data available",
+    "required_field": "This field is required"
+  },
+
+  "validation": {
+    "invalid_email": "Invalid email address",
+    "password_mismatch": "Passwords do not match",
+    "password_short": "Password too short",
+    "field_required": "Field is required",
+    "min_length": "Minimum {count} characters required",
+    "max_length": "Maximum {count} characters allowed",
+    "invalid_format": "Invalid format",
+    "something_went_wrong": "Something went wrong"
+  },
+
+  "items": {
+    "items": "{count} item(s)",
+    "add_item": "Add Item",
+    "edit_item": "Edit Item",
+    "delete_item": "Delete Item",
+    "item_list": "Item List",
+    "item_details": "Item Details",
+    "empty_list": "No items found"
+  },
+
+  "cart": {
+    "cart": "Cart",
+    "add_to_cart": "Add to Cart",
+    "remove_from_cart": "Remove from Cart",
+    "checkout": "Checkout",
+    "total": "Total",
+    "quantity": "Quantity",
+    "price": "Price",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "order_summary": "Order Summary",
+    "payment": "Payment",
+    "order_success": "Order Successful",
+    "order_failed": "Order Failed"
+  },
+
+  "chat": {
+    "chat": "Chat",
+    "messages": "Messages",
+    "new_message": "New Message",
+    "send": "Send",
+    "type_message": "Type a message...",
+    "no_messages": "No messages yet",
+    "online": "Online",
+    "offline": "Offline",
+    "last_seen": "Last seen {time}"
+  },
+
+  "errors": {
+    "error": "Error",
+    "not_found": "Not Found",
+    "unauthorized": "Unauthorized",
+    "forbidden": "Forbidden",
+    "internal_server_error": "Internal Server Error",
+    "timeout": "Request Timeout",
+    "no_internet": "No Internet Connection",
+    "try_again": "Please try again"
+  },
+
+  "notifications": {
+    "new_notification": "New Notification",
+    "mark_as_read": "Mark as Read",
+    "mark_all_as_read": "Mark All as Read",
+    "no_notifications": "No notifications available"
+  },
+
+  "dates": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "tomorrow": "Tomorrow",
+    "this_week": "This Week",
+    "last_week": "Last Week",
+    "this_month": "This Month",
+    "last_month": "Last Month",
+    "date": "Date",
+    "time": "Time"
+  },
+
+  "alerts": {
+    "confirm_delete": "Are you sure you want to delete this item?",
+    "action_success": "Action completed successfully",
+    "action_failed": "Action failed",
+    "logout_confirm": "Are you sure you want to logout?",
+    "unsaved_changes": "You have unsaved changes"
+  },
+
+  "permissions": {
+    "camera_permission": "Camera permission required",
+    "gallery_permission": "Gallery permission required",
+    "location_permission": "Location permission required",
+    "microphone_permission": "Microphone permission required"
+  },
+
+  "onboarding": {
+    "skip": "Skip",
+    "next": "Next",
+    "done": "Done",
+    "get_started": "Get Started",
+    "welcome_title": "Welcome to My Test Project",
+    "welcome_description": "An amazing app experience awaits you."
+  }
 }
