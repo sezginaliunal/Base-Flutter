@@ -103,6 +103,13 @@ abstract class AppLocaleKeys {
   static const valMaxLength = 'validation.max_length';
   static const valInvalidFormat = 'validation.invalid_format';
   static const valSomethingWrong = 'validation.something_went_wrong';
+  static const valEmailRequired = 'validation.email_required';
+  static const valPasswordRequired = 'validation.password_required';
+  static const valPasswordMinLength = 'validation.password_min_length';
+  static const valInvalidNumber = 'validation.invalid_number';
+  static const valPhoneRequired = 'validation.phone_required';
+  static const valInvalidPhone = 'validation.invalid_phone';
+  static const valInvalidUrl = 'validation.invalid_url';
 
   // ITEMS
   static const items = 'items.items';
