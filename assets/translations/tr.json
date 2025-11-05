@@ -1,9 +1,203 @@
 {
-   "init":{
-    "error":"Hata"
+  "init": {
+    "error": "Hata",
+    "loading": "Yükleniyor...",
+    "success": "Başarılı",
+    "network_error": "Ağ bağlantısı hatası",
+    "retry": "Tekrar dene",
+    "cancel": "İptal",
+    "ok": "Tamam",
+    "yes": "Evet",
+    "no": "Hayır"
   },
-  "app_title": "Test Projesi",
-  "hello": "Merhaba",
-  "welcome": "Hoş geldin, {name}!",
-  "items": "{count} adet"
+
+  "app": {
+    "title": "Test Projesi",
+    "version": "Sürüm",
+    "logout": "Çıkış yap",
+    "language": "Dil",
+    "theme": "Tema",
+    "dark_mode": "Karanlık Mod",
+    "light_mode": "Aydınlık Mod",
+    "settings": "Ayarlar",
+    "about": "Hakkında",
+    "privacy_policy": "Gizlilik Politikası",
+    "terms": "Kullanım Şartları"
+  },
+
+  "auth": {
+    "login": "Giriş yap",
+    "logout": "Çıkış yap",
+    "register": "Kayıt ol",
+    "signup": "Kayıt ol",
+    "signin": "Giriş yap",
+    "forgot_password": "Şifremi unuttum",
+    "reset_password": "Şifreyi sıfırla",
+    "new_password": "Yeni şifre",
+    "confirm_password": "Şifreyi onayla",
+    "old_password": "Eski şifre",
+    "change_password": "Şifre değiştir",
+    "email": "E-posta",
+    "username": "Kullanıcı adı",
+    "password": "Şifre",
+    "remember_me": "Beni hatırla",
+    "dont_have_account": "Hesabın yok mu?",
+    "already_have_account": "Zaten bir hesabın var mı?",
+    "verification_code": "Doğrulama kodu",
+    "send_code": "Kod gönder",
+    "verify": "Doğrula",
+    "login_success": "Giriş başarılı",
+    "register_success": "Kayıt başarılı"
+  },
+
+  "home": {
+    "home": "Ana Sayfa",
+    "dashboard": "Panel",
+    "welcome": "Hoş geldin, {name}!",
+    "search": "Ara",
+    "search_placeholder": "Bir şey ara...",
+    "notifications": "Bildirimler",
+    "view_all": "Tümünü gör",
+    "recent_activity": "Son aktiviteler",
+    "see_more": "Daha fazla gör"
+  },
+
+  "profile": {
+    "profile": "Profil",
+    "edit_profile": "Profili düzenle",
+    "update_profile": "Profili güncelle",
+    "first_name": "Ad",
+    "last_name": "Soyad",
+    "full_name": "Ad Soyad",
+    "phone": "Telefon",
+    "address": "Adres",
+    "city": "Şehir",
+    "country": "Ülke",
+    "save_changes": "Değişiklikleri kaydet",
+    "upload_photo": "Fotoğraf yükle",
+    "remove_photo": "Fotoğrafı kaldır"
+  },
+
+  "forms": {
+    "submit": "Gönder",
+    "save": "Kaydet",
+    "update": "Güncelle",
+    "delete": "Sil",
+    "add": "Ekle",
+    "edit": "Düzenle",
+    "clear": "Temizle",
+    "back": "Geri",
+    "next": "İleri",
+    "previous": "Önceki",
+    "confirm": "Onayla",
+    "close": "Kapat",
+    "open": "Aç",
+    "select": "Seç",
+    "choose_file": "Dosya seç",
+    "no_data": "Veri bulunamadı",
+    "required_field": "Bu alan zorunludur"
+  },
+
+  "validation": {
+    "invalid_email": "Geçersiz e-posta adresi",
+    "password_mismatch": "Şifreler eşleşmiyor",
+    "password_short": "Şifre çok kısa",
+    "field_required": "Bu alan zorunludur",
+    "min_length": "En az {count} karakter olmalı",
+    "max_length": "En fazla {count} karakter olabilir",
+    "invalid_format": "Geçersiz format",
+    "something_went_wrong": "Bir şeyler ters gitti"
+  },
+
+  "items": {
+    "items": "{count} adet",
+    "add_item": "Öğe ekle",
+    "edit_item": "Öğeyi düzenle",
+    "delete_item": "Öğeyi sil",
+    "item_list": "Öğe listesi",
+    "item_details": "Öğe detayları",
+    "empty_list": "Herhangi bir öğe yok"
+  },
+
+  "cart": {
+    "cart": "Sepet",
+    "add_to_cart": "Sepete ekle",
+    "remove_from_cart": "Sepetten çıkar",
+    "checkout": "Satın al",
+    "total": "Toplam",
+    "quantity": "Adet",
+    "price": "Fiyat",
+    "subtotal": "Ara toplam",
+    "shipping": "Kargo",
+    "order_summary": "Sipariş özeti",
+    "payment": "Ödeme",
+    "order_success": "Sipariş başarılı",
+    "order_failed": "Sipariş başarısız"
+  },
+
+  "chat": {
+    "chat": "Sohbet",
+    "messages": "Mesajlar",
+    "new_message": "Yeni mesaj",
+    "send": "Gönder",
+    "type_message": "Mesaj yaz...",
+    "no_messages": "Henüz mesaj yok",
+    "online": "Çevrimiçi",
+    "offline": "Çevrimdışı",
+    "last_seen": "Son görülme {time}"
+  },
+
+  "errors": {
+    "error": "Hata",
+    "not_found": "Bulunamadı",
+    "unauthorized": "Yetkisiz erişim",
+    "forbidden": "Erişim engellendi",
+    "internal_server_error": "Sunucu hatası",
+    "timeout": "Zaman aşımı",
+    "no_internet": "İnternet bağlantısı yok",
+    "try_again": "Lütfen tekrar deneyin"
+  },
+
+  "notifications": {
+    "new_notification": "Yeni bildirim",
+    "mark_as_read": "Okundu olarak işaretle",
+    "mark_all_as_read": "Tümünü okundu yap",
+    "no_notifications": "Henüz bildirim yok"
+  },
+
+  "dates": {
+    "today": "Bugün",
+    "yesterday": "Dün",
+    "tomorrow": "Yarın",
+    "this_week": "Bu hafta",
+    "last_week": "Geçen hafta",
+    "this_month": "Bu ay",
+    "last_month": "Geçen ay",
+    "date": "Tarih",
+    "time": "Saat"
+  },
+
+  "alerts": {
+    "confirm_delete": "Bu öğeyi silmek istediğine emin misin?",
+    "action_success": "İşlem başarıyla tamamlandı",
+    "action_failed": "İşlem başarısız oldu",
+    "logout_confirm": "Çıkış yapmak istediğine emin misin?",
+    "unsaved_changes": "Kaydedilmemiş değişikliklerin var"
+  },
+
+  "permissions": {
+    "camera_permission": "Kamera izni gerekli",
+    "gallery_permission": "Galeri izni gerekli",
+    "location_permission": "Konum izni gerekli",
+    "microphone_permission": "Mikrofon izni gerekli"
+  },
+
+  "onboarding": {
+    "skip": "Geç",
+    "next": "İleri",
+    "done": "Bitti",
+    "get_started": "Başla",
+    "welcome_title": "Test Projesine Hoş Geldin",
+    "welcome_description": "Harika bir uygulama deneyimi seni bekliyor."
+  }
 }
