@@ -15,7 +15,7 @@ Future<void> main() async {
     EasyLocalization(
       supportedLocales: AppInfos.locale,
       path: AppInfos.translationsBase,
-      fallbackLocale: AppInfos.locale.first, //English
+      fallbackLocale: AppInfos.locale.first,
       child: AppProviders().myApp,
     ),
   );

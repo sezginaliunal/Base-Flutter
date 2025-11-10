@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:test_project/core/config/constants/assets/app_font_styles.dart';
 import 'package:test_project/core/config/constants/colors/dark_colors.dart';
 import 'package:test_project/core/config/constants/colors/light_colors.dart';
 // import 'package:test_project/core/config/constants/assets/app_font_styles.dart';
@@ -7,7 +8,7 @@ import 'package:test_project/core/config/constants/colors/light_colors.dart';
 class AppThemes {
   /// Light Theme
   static ThemeData get light => ThemeData(
-    useMaterial3: true,
+    // useMaterial3: false,
     brightness: Brightness.light,
     // fontFamily: AppFontStyles.kanit.fontName, // Uncomment when needed
 
@@ -339,8 +340,7 @@ class AppThemes {
   static ThemeData get dark => ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    // fontFamily: AppFontStyles.kanit.fontName, // Uncomment when needed
-
+    fontFamily: AppFontStyles.kanit.fontName,
     // === COLOR SCHEME ===
     colorScheme: ColorScheme.dark(
       primary: DarkColors.primary,

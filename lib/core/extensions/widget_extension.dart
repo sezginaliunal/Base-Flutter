@@ -286,6 +286,16 @@ extension WidgetExtensions on Widget {
   // =================== Visibility & Disabled ===================
   Widget visible({bool isVisible = false}) =>
       isVisible ? this : const SizedBox.shrink();
+  Widget fadeVisible(
+    bool visible, {
+    Duration duration = const Duration(milliseconds: 300),
+  }) {
+    return AnimatedOpacity(
+      opacity: visible ? 1 : 0,
+      duration: duration,
+      child: Visibility(visible: visible, child: this),
+    );
+  }
 
   Widget disabled({bool value = true, double opacity = 0.5}) => AbsorbPointer(
     absorbing: value,
@@ -293,6 +303,18 @@ extension WidgetExtensions on Widget {
   );
 
   Widget opacity(double value) => Opacity(opacity: value, child: this);
+  Widget withGradient(
+    List<Color> colors, {
+    Alignment begin = Alignment.topLeft,
+    Alignment end = Alignment.bottomRight,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(colors: colors, begin: begin, end: end),
+      ),
+      child: this,
+    );
+  }
 
   // =================== Alignment ===================
   Widget align(Alignment alignment) => Align(alignment: alignment, child: this);
@@ -467,4 +489,23 @@ extension WidgetExtensions on Widget {
     ),
     child: this,
   );
+}
+
+extension FutureRetry<T> on Future<T> {
+  Future<T> retry({
+    int times = 3,
+    Duration delay = const Duration(seconds: 1),
+  }) async {
+    for (int i = 0; i < times; i++) {
+      try {
+        return await this;
+      } catch (e) {
+        print(e);
+        if (i == times - 1) rethrow; // son denemede hata fırlat
+        await Future.delayed(delay, () {});
+        ; // tekrar denemeden önce bekle
+      }
+    }
+    return await this; // bu satır pratikte ulaşılmaz
+  }
 }

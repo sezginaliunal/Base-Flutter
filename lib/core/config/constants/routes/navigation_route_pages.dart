@@ -1,7 +1,6 @@
 // lib/core/routes/route_generator.dart
 import 'package:flutter/material.dart';
 import 'package:test_project/app/features/init/view/init_view.dart';
-import 'package:test_project/app/features/jsonplaceholder/view/dummy_page.dart';
 import 'package:test_project/core/components/unknown_view.dart';
 import 'package:test_project/core/config/constants/routes/navigation_routes.dart';
 
@@ -15,8 +14,7 @@ class AppRouter {
     switch (settings.name) {
       case RoutesName.init:
         return _page(const InitPage(), settings);
-      case RoutesName.dummy:
-        return _page(const DummyPage(), settings);
+
       default:
         return _page(
           const Scaffold(body: Center(child: Text('404 - Sayfa bulunamadı'))),

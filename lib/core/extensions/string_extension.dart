@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 extension StringExtensions on String? {
   //Locale
@@ -221,4 +222,73 @@ extension StringExtensions on String? {
     this ?? '',
     style: TextStyle(fontSize: fontSize, color: color, fontWeight: fontWeight),
   );
+
+  /// Genel `launchUrl` güvenli çağırımı
+  Future<bool> _safeLaunch(String uriString) async {
+    try {
+      final uri = Uri.parse(uriString);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+        return true;
+      }
+      return false;
+    } catch (e) {
+      debugPrint('Launch error: $e');
+      return false;
+    }
+  }
+
+  /// Telefon araması başlatır
+  Future<bool> launchPhone() async {
+    if (this == null || this!.isEmpty) return false;
+    final phone = this!.replaceAll(RegExp(r'[^0-9+]'), '');
+    return _safeLaunch('tel:$phone');
+  }
+
+  /// SMS ekranını açar (isteğe bağlı mesaj içeriği)
+  Future<bool> launchSms({String? body}) async {
+    if (this == null || this!.isEmpty) return false;
+    final phone = this!.replaceAll(RegExp(r'[^0-9+]'), '');
+    final uri = body != null
+        ? 'sms:$phone?body=${Uri.encodeComponent(body)}'
+        : 'sms:$phone';
+    return _safeLaunch(uri);
+  }
+
+  /// E-posta uygulamasını açar
+  Future<bool> launchEmail({String? subject, String? body}) async {
+    if (this == null || this!.isEmpty) return false;
+    final email = this!.trim();
+    final params = <String, String>{};
+    if (subject != null) params['subject'] = subject;
+    if (body != null) params['body'] = body;
+    final query = params.entries
+        .map(
+          (e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}',
+        )
+        .join('&');
+    return _safeLaunch('mailto:$email${query.isEmpty ? '' : '?$query'}');
+  }
+
+  /// Google Maps'te konumu açar
+  /// - string: adres veya "lat,long"
+  Future<bool> launchMaps() async {
+    if (this == null || this!.isEmpty) return false;
+    final value = this!.trim();
+    final uriString = value.contains(',')
+        ? 'https://www.google.com/maps/search/?api=1&query=$value'
+        : 'https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent(value)}';
+    return _safeLaunch(uriString);
+  }
+
+  /// Web sitesini tarayıcıda açar
+  Future<bool> launchWebsite() async {
+    if (this == null || this!.isEmpty) return false;
+    var url = this!.trim();
+    if (!url.startsWith('http')) {
+      url = 'https://$url';
+    }
+    return _safeLaunch(url);
+  }
 }

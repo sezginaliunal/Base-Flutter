@@ -1,19 +1,30 @@
+import 'package:flutter/material.dart';
+
 enum AppFontStyles {
-  kanit('Kanit', 'Regular', 'Italic', 'Bold', 14),
-  roboto('Roboto', 'Regular', 'Italic', 'Bold', 16),
-  lato('Lato', 'Regular', 'Italic', 'Bold', 12);
+  kanit('Kanit', 14),
+  roboto('Roboto', 16),
+  lato('Lato', 12);
 
-  const AppFontStyles(
-    this.fontName,
-    this.regular,
-    this.italic,
-    this.bold,
-    this.size,
-  );
-
+  const AppFontStyles(this.fontName, this.size);
   final String fontName;
-  final String regular;
-  final String italic;
-  final String bold;
   final double size;
+}
+
+// Extension
+extension AppFontStylesX on AppFontStyles {
+  TextStyle get regular => TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w400,
+    fontSize: size,
+  );
+  TextStyle get italic => TextStyle(
+    fontFamily: fontName,
+    fontStyle: FontStyle.italic,
+    fontSize: size,
+  );
+  TextStyle get bold => TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.bold,
+    fontSize: size,
+  );
 }

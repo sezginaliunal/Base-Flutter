@@ -28,11 +28,11 @@ class DarkColors {
   static const surfaceVariant = Color(0xFF43474E);
   static const onSurfaceVariant = Color(0xFFC4C6D0);
 
-  // === ERROR COLORS ===
-  static const error = Color(0xFFFFB4AB);
-  static const onError = Color(0xFF690005);
-  static const errorContainer = Color(0xFF93000A);
-  static const onErrorContainer = Color(0xFFFFDAD6);
+  // === ERROR COLORS (Cırtlak versiyon) ===
+  static const error = Color(0xFFFF1744); // canlı kırmızı
+  static const onError = Color(0xFFFFFFFF); // beyaz (maksimum kontrast)
+  static const errorContainer = Color(0xFFFF5252); // parlak mercan kırmızısı
+  static const onErrorContainer = Color(0xFF000000); // siyah (güçlü vurgu)
 
   // === SUCCESS COLORS ===
   static const success = Color(0xFF81C784);
