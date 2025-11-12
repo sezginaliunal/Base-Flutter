@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:test_project/core/config/constants/app/app_locale_keys.dart';
-import 'package:test_project/core/extensions/string_extension.dart';
+import 'package:clara/extensions/string_extension.dart';
 
 class Validators {
   // =================== Email ===================
@@ -20,8 +20,9 @@ class Validators {
       return AppLocaleKeys.valPasswordRequired.tr();
     }
     if ((input?.trim().length ?? 0) < minLength) {
-      return AppLocaleKeys.valPasswordMinLength
-          .tr(namedArgs: {'count': minLength.toString()});
+      return AppLocaleKeys.valPasswordMinLength.tr(
+        namedArgs: {'count': minLength.toString()},
+      );
     }
     return null;
   }

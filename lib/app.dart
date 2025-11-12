@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: themeCubit.state.themeData,
       navigatorKey: AppKeys().navigatorKey,
-      initialRoute: RoutesName.init,
+      initialRoute: RoutesName.init.path,
       onGenerateRoute: AppRouter.instance.onGenerateRoute,
       onUnknownRoute: AppRouter.instance.onUnknownRoute,
       locale: context.locale,

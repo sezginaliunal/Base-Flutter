@@ -68,7 +68,7 @@ class AppNav {
 
   // =================== CLEAR STACK & GO TO HOME ===================
   static void toHome() {
-    offAllNamed(RoutesName.home);
+    offAllNamed(RoutesName.home.path);
   }
 
   // =================== GO BACK OR DEFAULT ===================

@@ -1,6 +1,6 @@
+import 'package:clara/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:test_project/core/config/constants/app/app_keys.dart';
-import 'package:test_project/core/extensions/context_extension.dart';
 
 /// App genelinde context kullanmadan UI bileşenleri göstermek için yardımcı sınıf.
 /// Snackbar, Dialog, BottomSheet, DatePicker, TimePicker hepsi tek yerden yönetilir.

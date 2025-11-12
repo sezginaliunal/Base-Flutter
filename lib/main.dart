@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:test_project/core/config/constants/app/app_infos.dart';
 import 'package:test_project/core/config/constants/app/app_providers.dart';
-import 'package:test_project/core/config/init/service_locator.dart';
+import 'package:test_project/core/config/di/service_locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

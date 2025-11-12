@@ -1,7 +1,10 @@
-class RoutesName {
-  static const init = '/';
-  static const dummy = '/dummy';
-  static const home = '/home';
-  static const settings = '/settings';
-  static const profile = '/profile';
+enum RoutesName {
+  init('/'),
+  dummy('/dummy'),
+  home('/home'),
+  settings('/settings'),
+  profile('/profile');
+
+  final String path;
+  const RoutesName(this.path);
 }

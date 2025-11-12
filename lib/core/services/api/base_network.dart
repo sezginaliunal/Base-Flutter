@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 // import 'package:get/get.dart' hide FormData, MultipartFile, Response;
 import 'package:path/path.dart' as path;
 // import 'package:test_project/core/config/constants/routes/navigation_routes.dart';
@@ -35,10 +36,9 @@ class BaseNetwork {
           //   options.headers['Authorization'] = 'Bearer $token';
           // }
           // final fullUrl =
-          //     '${options.baseUrl}${options.path}?${options.queryParameters.isNotEmpty ? options.queryParameters : ''}';
+          // '${options.baseUrl}${options.path}?${options.queryParameters.isNotEmpty ? options.queryParameters : ''}';
           // debugPrint('🛰️ [REQUEST] ${options.method} => $fullUrl');
           // debugPrint('📦 Headers: ${options.headers}');
-          // debugPrint('📦 Data: ${options.data}');
           return handler.next(options);
         },
         onResponse: (response, handler) async {

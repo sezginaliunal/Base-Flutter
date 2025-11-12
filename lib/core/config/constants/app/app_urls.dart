@@ -8,7 +8,7 @@ enum BaseUrls {
 
 enum AppUrls {
   todos('todos', BaseUrls.jsonPlaceholder),
-  posts('posts', BaseUrls.jsonPlaceholder),
+  comments('comments', BaseUrls.jsonPlaceholder),
   users('users', BaseUrls.jsonPlaceholder),
   login('auth/login', BaseUrls.myApi);
 
