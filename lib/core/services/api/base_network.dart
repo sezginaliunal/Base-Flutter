@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 // import 'package:get/get.dart' hide FormData, MultipartFile, Response;
 import 'package:path/path.dart' as path;
 // import 'package:test_project/core/config/constants/routes/navigation_routes.dart';
@@ -237,7 +236,7 @@ class BaseNetwork {
     } catch (_) {
       return ApiResponse<T>(
         success: false,
-        message: ResponseMessages.somethingError.message,
+        message: ResponseMessages.somethingError.name,
         statusCode: 0,
       );
     }
@@ -265,7 +264,7 @@ class BaseNetwork {
       // Hata interceptor içinde yakalanıyor zaten
       return ApiResponse<T>(
         success: false,
-        message: ResponseMessages.somethingError.message,
+        message: ResponseMessages.somethingError.name,
         statusCode: 0,
       );
     }
@@ -295,7 +294,7 @@ class BaseNetwork {
     }
     return ApiResponse<T>(
       success: false,
-      message: ResponseMessages.somethingError.message,
+      message: ResponseMessages.somethingError.name,
       statusCode: statusCode,
     );
   }

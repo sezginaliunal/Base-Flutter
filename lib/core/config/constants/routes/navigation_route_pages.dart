@@ -11,15 +11,13 @@ class AppRouter {
 
   // 🔹 Route üreten ana method
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case RoutesName.init:
-        return _page(const InitPage(), settings);
-
-      default:
-        return _page(
-          const Scaffold(body: Center(child: Text('404 - Sayfa bulunamadı'))),
-          settings,
-        );
+    if (settings.name == RoutesName.init.path) {
+      return _page(const InitPage(), settings);
+    } else {
+      return _page(
+        const Scaffold(body: Center(child: UnknownView())),
+        settings,
+      );
     }
   }
 
@@ -31,15 +29,4 @@ class AppRouter {
   MaterialPageRoute<dynamic> _page(Widget page, RouteSettings settings) {
     return MaterialPageRoute(builder: (_) => page, settings: settings);
   }
-
-  // 🔹 Fade animasyonlu geçiş
-  // PageRouteBuilder<dynamic> _fadePage(Widget page, RouteSettings settings) {
-  //   return PageRouteBuilder(
-  //     pageBuilder: (_, __, ___) => page,
-  //     settings: settings,
-  //     transitionDuration: const Duration(milliseconds: 300),
-  //     transitionsBuilder: (_, animation, __, child) =>
-  //         FadeTransition(opacity: animation, child: child),
-  //   );
-  // }
 }
