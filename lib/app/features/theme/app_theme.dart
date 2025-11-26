@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:test_project/core/config/constants/assets/app_font_styles.dart';
 import 'package:test_project/core/config/constants/colors/dark_colors.dart';
 import 'package:test_project/core/config/constants/colors/light_colors.dart';
-// import 'package:test_project/core/config/constants/assets/app_font_styles.dart';
 
 class AppThemes {
   /// Light Theme
   static ThemeData get light => ThemeData(
-    // useMaterial3: false,
+    fontFamily: AppFontStyles.sfProDisplay.fontName,
+    useMaterial3: true,
     brightness: Brightness.light,
-    // fontFamily: AppFontStyles.kanit.fontName, // Uncomment when needed
+    // fontFamily: AppFontStyles.sfProDisplay.fontName, // Uncomment when needed
 
     // === COLOR SCHEME ===
     colorScheme: ColorScheme.light(
@@ -65,7 +65,8 @@ class AppThemes {
         foregroundColor: LightColors.onPrimary,
         disabledBackgroundColor: LightColors.buttonDisabled,
         disabledForegroundColor: LightColors.onButtonDisabled,
-        elevation: 2,
+        elevation: 5,
+        shadowColor: LightColors.buttonPrimary,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -123,7 +124,7 @@ class AppThemes {
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(width: 1),
+        side: const BorderSide(color: LightColors.cardBorder, width: 1),
       ),
     ),
 
@@ -204,7 +205,10 @@ class AppThemes {
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
-      hintStyle: TextStyle(color: LightColors.textFieldHint, fontSize: 16),
+      hintStyle: const TextStyle(
+        color: LightColors.textFieldHint,
+        fontSize: 16,
+      ),
       errorStyle: const TextStyle(color: LightColors.error, fontSize: 12),
 
       // Icons
@@ -329,8 +333,8 @@ class AppThemes {
 
     // === SNACKBAR ===
     snackBarTheme: SnackBarThemeData(
-      backgroundColor: LightColors.onSurface,
-      contentTextStyle: const TextStyle(color: LightColors.surface),
+      backgroundColor: LightColors.secondary,
+      contentTextStyle: const TextStyle(color: LightColors.onSecondary),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       behavior: SnackBarBehavior.floating,
     ),
@@ -340,7 +344,8 @@ class AppThemes {
   static ThemeData get dark => ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    fontFamily: AppFontStyles.kanit.fontName,
+    // fontFamily: AppFontStyles.sfProDisplay.fontName,
+
     // === COLOR SCHEME ===
     colorScheme: ColorScheme.dark(
       primary: DarkColors.primary,
@@ -394,7 +399,8 @@ class AppThemes {
         foregroundColor: DarkColors.onPrimary,
         disabledBackgroundColor: DarkColors.buttonDisabled,
         disabledForegroundColor: DarkColors.onButtonDisabled,
-        elevation: 2,
+        elevation: 5,
+        shadowColor: DarkColors.buttonPrimary,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -452,7 +458,7 @@ class AppThemes {
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(width: 1),
+        side: const BorderSide(color: DarkColors.cardBorder, width: 1),
       ),
     ),
 
@@ -533,7 +539,7 @@ class AppThemes {
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
-      hintStyle: TextStyle(color: DarkColors.textFieldHint, fontSize: 16),
+      hintStyle: const TextStyle(color: DarkColors.textFieldHint, fontSize: 16),
       errorStyle: const TextStyle(color: DarkColors.error, fontSize: 12),
 
       // Icons
@@ -658,8 +664,8 @@ class AppThemes {
 
     // === SNACKBAR ===
     snackBarTheme: SnackBarThemeData(
-      backgroundColor: DarkColors.onSurface,
-      contentTextStyle: const TextStyle(color: DarkColors.surface),
+      backgroundColor: DarkColors.secondary,
+      contentTextStyle: const TextStyle(color: DarkColors.onSecondary),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       behavior: SnackBarBehavior.floating,
     ),

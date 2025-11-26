@@ -62,10 +62,29 @@ flutter:
   assets:
     - assets/translations/
   fonts:
-    - family: Kanit
+    - family: SFProDisplay
       fonts:
-        - asset: assets/fonts/Kanit-Regular.ttf
-        - asset: assets/fonts/Kanit-Bold.ttf
+        - asset: assets/fonts/SFPRODISPLAYULTRALIGHTITALIC.OTF
+          weight: 100
+          style: italic
+        - asset: assets/fonts/SFPRODISPLAYTHINITALIC.OTF
+          weight: 200
+          style: italic
+        - asset: assets/fonts/SFPRODISPLAYLIGHTITALIC.OTF
+          weight: 300
+          style: italic
+        - asset: assets/fonts/SFPRODISPLAYREGULAR.OTF
+          weight: 400
+        - asset: assets/fonts/SFPRODISPLAYMEDIUM.OTF
+          weight: 500
+        - asset: assets/fonts/SFPRODISPLAYSEMIBOLDITALIC.OTF
+          weight: 600
+          style: italic
+        - asset: assets/fonts/SFPRODISPLAYBOLD.OTF
           weight: 700
-        - asset: assets/fonts/Kanit-Italic.ttf
+        - asset: assets/fonts/SFPRODISPLAYHEAVYITALIC.OTF
+          weight: 800
+          style: italic
+        - asset: assets/fonts/SFPRODISPLAYBLACKITALIC.OTF
+          weight: 900
           style: italic

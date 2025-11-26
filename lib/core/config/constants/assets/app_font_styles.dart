@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 enum AppFontStyles {
-  kanit('Kanit', 14),
-  roboto('Roboto', 16),
-  lato('Lato', 12);
+  sfProDisplay('SFProDisplay', 32); // Yeni font eklendi
 
   const AppFontStyles(this.fontName, this.size);
   final String fontName;
