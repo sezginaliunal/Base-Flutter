@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:test_project/core/config/constants/app/app_locale_keys.dart';
 import 'package:clara/extensions/string_extension.dart';
 
@@ -6,10 +6,10 @@ class Validators {
   // =================== Email ===================
   static String? validateEmail(String? input) {
     if (input.isNullOrEmpty) {
-      return AppLocaleKeys.valEmailRequired.tr();
+      return AppLocaleKeys.valEmailRequired.tr;
     }
     if (!(input?.isEmail ?? false)) {
-      return AppLocaleKeys.valInvalidEmail.tr();
+      return AppLocaleKeys.valInvalidEmail.tr;
     }
     return null;
   }
@@ -17,20 +17,21 @@ class Validators {
   // =================== Password ===================
   static String? validatePassword(String? input, {int minLength = 8}) {
     if (input.isNullOrEmpty) {
-      return AppLocaleKeys.valPasswordRequired.tr();
+      return AppLocaleKeys.valPasswordRequired.tr;
     }
     if ((input?.trim().length ?? 0) < minLength) {
-      return AppLocaleKeys.valPasswordMinLength.tr(
-        namedArgs: {'count': minLength.toString()},
-      );
+      return AppLocaleKeys.valPasswordMinLength.trParams({
+        'count': minLength.toString(),
+      });
     }
     return null;
   }
 
   // =================== Null / Required ===================
+
   static String? validateNull(String? input) {
     if (input.isNullOrEmpty) {
-      return AppLocaleKeys.valFieldRequired.tr();
+      return AppLocaleKeys.valFieldRequired.tr;
     }
     return null;
   }
@@ -38,10 +39,10 @@ class Validators {
   // =================== Numeric ===================
   static String? validateNumeric(String? input) {
     if (input.isNullOrEmpty) {
-      return AppLocaleKeys.valFieldRequired.tr();
+      return AppLocaleKeys.valFieldRequired.tr;
     }
     if (!(input?.isNumeric ?? false)) {
-      return AppLocaleKeys.valInvalidNumber.tr();
+      return AppLocaleKeys.valInvalidNumber.tr;
     }
     return null;
   }
@@ -49,10 +50,10 @@ class Validators {
   // =================== Phone Number ===================
   static String? validatePhoneNumber(String? input) {
     if (input.isNullOrEmpty) {
-      return AppLocaleKeys.valPhoneRequired.tr();
+      return AppLocaleKeys.valPhoneRequired.tr;
     }
     if (!(input?.isPhoneNumber ?? false)) {
-      return AppLocaleKeys.valInvalidPhone.tr();
+      return AppLocaleKeys.valInvalidPhone.tr;
     }
     return null;
   }
@@ -63,7 +64,7 @@ class Validators {
     if (nullError != null) return nullError;
 
     if (!(input!.startsWith('http://') || input.startsWith('https://'))) {
-      return AppLocaleKeys.valInvalidUrl.tr();
+      return AppLocaleKeys.valInvalidUrl.tr;
     }
 
     return null;

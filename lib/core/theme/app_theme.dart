@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:test_project/core/config/constants/assets/app_font_styles.dart';
 import 'package:test_project/core/config/constants/colors/dark_colors.dart';
 import 'package:test_project/core/config/constants/colors/light_colors.dart';
 
 class AppThemes {
   /// Light Theme
   static ThemeData get light => ThemeData(
-    fontFamily: AppFontStyles.sfProDisplay.fontName,
+    // fontFamily: AppFontStyles.sfProDisplay.fontName,
     useMaterial3: true,
     brightness: Brightness.light,
     // fontFamily: AppFontStyles.sfProDisplay.fontName, // Uncomment when needed
@@ -56,6 +55,9 @@ class AppThemes {
       ),
       iconTheme: const IconThemeData(color: LightColors.iconPrimary),
       systemOverlayStyle: SystemUiOverlayStyle.dark,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(8),
+      ),
     ),
 
     // === ELEVATED BUTTON ===
@@ -330,14 +332,6 @@ class AppThemes {
       linearTrackColor: LightColors.primaryContainer,
       circularTrackColor: LightColors.primaryContainer,
     ),
-
-    // === SNACKBAR ===
-    snackBarTheme: SnackBarThemeData(
-      backgroundColor: LightColors.secondary,
-      contentTextStyle: const TextStyle(color: LightColors.onSecondary),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      behavior: SnackBarBehavior.floating,
-    ),
   );
 
   /// Dark Theme
@@ -379,7 +373,7 @@ class AppThemes {
 
     // === APP BAR ===
     appBarTheme: AppBarTheme(
-      backgroundColor: DarkColors.appBarBackground,
+      backgroundColor: DarkColors.buttonPrimary,
       foregroundColor: DarkColors.appBarForeground,
       elevation: 0,
       centerTitle: false,
@@ -390,6 +384,9 @@ class AppThemes {
       ),
       iconTheme: const IconThemeData(color: DarkColors.iconPrimary),
       systemOverlayStyle: SystemUiOverlayStyle.light,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(8),
+      ),
     ),
 
     // === ELEVATED BUTTON ===
@@ -430,7 +427,7 @@ class AppThemes {
       ),
     ),
 
-    // === FILLED BUTTON ===
+    // === FILLED BUTTON === //Error buton
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
         backgroundColor: DarkColors.primary,
@@ -660,14 +657,6 @@ class AppThemes {
       color: DarkColors.primary,
       linearTrackColor: DarkColors.primaryContainer,
       circularTrackColor: DarkColors.primaryContainer,
-    ),
-
-    // === SNACKBAR ===
-    snackBarTheme: SnackBarThemeData(
-      backgroundColor: DarkColors.secondary,
-      contentTextStyle: const TextStyle(color: DarkColors.onSecondary),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      behavior: SnackBarBehavior.floating,
     ),
   );
 

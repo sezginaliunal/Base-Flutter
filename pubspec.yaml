@@ -19,7 +19,7 @@ dependencies:
   intl: ^0.20.2
 
   # State Management
-  flutter_bloc: ^9.1.1
+  get: ^4.7.3
   # Local Database
   hive: any
   hive_flutter: any
@@ -31,10 +31,8 @@ dependencies:
   # Serialization / JSON
   json_annotation: any
   url_launcher: ^6.3.2
-  easy_localization: ^3.0.8
-  get_it: ^9.0.5
   clara: ^0.0.1
-  equatable: ^2.0.7
+
 
 # =========================================================
 # Dev Dependencies

@@ -1,30 +1,29 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:test_project/app/features/theme/cubit/theme_cubit.dart';
+import 'package:get/get.dart';
+import 'package:test_project/app/features/init/init_binding.dart';
 import 'package:test_project/core/config/constants/app/app_infos.dart';
 import 'package:test_project/core/config/constants/app/app_keys.dart';
 import 'package:test_project/core/config/constants/routes/navigation_route_pages.dart';
 import 'package:test_project/core/config/constants/routes/navigation_routes.dart';
+import 'package:test_project/core/theme/theme_controller.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final themeCubit = context.watch<ThemeCubit>();
+    final themeController = Get.find<ThemeController>();
 
-    return MaterialApp(
-      title: AppInfos.appName,
-      debugShowCheckedModeBanner: false,
-      theme: themeCubit.state.themeData,
-      navigatorKey: AppKeys().navigatorKey,
-      initialRoute: RoutesName.init.path,
-      onGenerateRoute: AppRouter.instance.onGenerateRoute,
-      onUnknownRoute: AppRouter.instance.onUnknownRoute,
-      locale: context.locale,
-      supportedLocales: context.supportedLocales,
-      localizationsDelegates: context.localizationDelegates,
+    return Obx(
+      () => GetMaterialApp(
+        title: AppInfos.appName,
+        debugShowCheckedModeBanner: false,
+        navigatorKey: AppKeys().navigatorKey,
+        getPages: AppRouter().getPages(),
+        initialBinding: InitBinding(),
+        theme: themeController.state.themeData,
+        initialRoute: RoutesName.init.path,
+      ),
     );
   }
 }

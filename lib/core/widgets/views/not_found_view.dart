@@ -1,8 +1,8 @@
 import 'package:clara/extensions/context_extension.dart';
 import 'package:clara/extensions/widget_extension.dart';
 import 'package:clara/extensions/string_extension.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test_project/core/config/constants/app/app_locale_keys.dart';
 
 class NotFoundView extends StatelessWidget {
@@ -27,7 +27,7 @@ class NotFoundView extends StatelessWidget {
             radius: 48,
           ),
           Text(
-            AppLocaleKeys.errNotFound.tr(),
+            AppLocaleKeys.errNotFound.tr,
             style: context.textStyles.titleMedium,
           ),
           if (message.isNotNullOrEmpty)
@@ -42,7 +42,7 @@ class NotFoundView extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: onBack,
               icon: const Icon(Icons.arrow_back_rounded),
-              label: Text(AppLocaleKeys.cancel.tr()),
+              label: Text(AppLocaleKeys.cancel.tr),
             ),
         ],
       ),
