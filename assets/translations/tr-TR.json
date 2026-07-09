@@ -1,0 +1,14 @@
+{
+  "login": "Giriş Yap",
+  "register": "Kayıt Ol",
+  "email": "E-posta",
+  "password": "Şifre",
+  "forgotPassword": "Şifremi Unuttum?",
+  "dontHaveAccount": "Hesabınız yok mu?",
+  "alreadyHaveAccount": "Zaten hesabınız var mı?",
+  "signUp": "Kayıt Ol",
+  "logout": "Çıkış Yap",
+  "home": "Ana Sayfa",
+  "profile": "Profil",
+  "settings": "Ayarlar"
+}
